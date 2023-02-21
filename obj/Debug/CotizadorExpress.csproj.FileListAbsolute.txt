@@ -1,0 +1,12 @@
+D:\Repositorio\C#\CotizadorExpress\bin\Debug\CotizadorExpress.exe.config
+D:\Repositorio\C#\CotizadorExpress\bin\Debug\CotizadorExpress.exe
+D:\Repositorio\C#\CotizadorExpress\bin\Debug\CotizadorExpress.pdb
+D:\Repositorio\C#\CotizadorExpress\obj\Debug\CotizadorExpress.csproj.AssemblyReference.cache
+D:\Repositorio\C#\CotizadorExpress\obj\Debug\CotizadorExpress.csproj.SuggestedBindingRedirects.cache
+D:\Repositorio\C#\CotizadorExpress\obj\Debug\CotizadorExpress.Properties.Resources.resources
+D:\Repositorio\C#\CotizadorExpress\obj\Debug\CotizadorExpress.csproj.GenerateResource.cache
+D:\Repositorio\C#\CotizadorExpress\obj\Debug\CotizadorExpress.csproj.CoreCompileInputs.cache
+D:\Repositorio\C#\CotizadorExpress\obj\Debug\CotizadorExpress.exe
+D:\Repositorio\C#\CotizadorExpress\obj\Debug\CotizadorExpress.pdb
+D:\Repositorio\C#\CotizadorExpress\obj\Debug\CotizadorExpress.Form1.resources
+D:\Repositorio\C#\CotizadorExpress\obj\Debug\CotizadorExpress.History.resources
