@@ -16,11 +16,14 @@
         string Price { get; }
         int Quality { get; }
 
+        int GarmentType { get; set; }
         // Shirt
         int ShirtSleeve { get; set; }
         int ShirtNeck { get; set; }
 
         // Pant
         int PantType { get; set; }
+
+        void SetStockUi();
     }
 }

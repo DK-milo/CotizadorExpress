@@ -7,17 +7,17 @@ namespace CotizadorExpress
         public History()
         {
             InitializeComponent();
-            label1.Text = "";
+            labelHistory.Text = "";
         }
         public void SetHistory(string data)
         {
-            if (label1.Text == "")
+            if (labelHistory.Text == "")
             {
-                label1.Text += $"{data} \n----------";
+                labelHistory.Text += $"{data} \n----------";
             }
             else
             {
-                label1.Text += $"\n{data} \n----------";
+                labelHistory.Text += $"\n{data} \n----------";
             }
         }
     }

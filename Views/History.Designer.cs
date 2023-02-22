@@ -28,26 +28,27 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
+            this.labelHistory = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // label1
+            // labelHistory
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 9);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "label1";
+            this.labelHistory.AutoSize = true;
+            this.labelHistory.Location = new System.Drawing.Point(12, 9);
+            this.labelHistory.Name = "labelHistory";
+            this.labelHistory.Size = new System.Drawing.Size(44, 13);
+            this.labelHistory.TabIndex = 0;
+            this.labelHistory.Text = "Historial";
             // 
             // History
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(251, 254);
-            this.Controls.Add(this.label1);
+            this.AutoScroll = true;
+            this.ClientSize = new System.Drawing.Size(284, 256);
+            this.Controls.Add(this.labelHistory);
             this.Name = "History";
-            this.Text = "Historial Cotizaciones";
+            this.Text = "Historial de cotizaciones";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -55,6 +56,6 @@
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label labelHistory;
     }
 }

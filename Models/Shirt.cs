@@ -7,14 +7,12 @@
         public enum ENeck { Normal, Mao }
         private ENeck Neck;
 
-        public Shirt(ESleeve sleeve, ENeck neck, EQuality quality, float price)
+        public Shirt(){ }
+        public Shirt(int sleeve, int neck, int quality)
         {
-            Sleeve = sleeve;
-            Neck = neck;
-            Quality = quality;
-            BasePrice = price;
-            FinalPrice = price;
-
+            Sleeve = (ESleeve)sleeve;
+            Neck = (ENeck)neck;
+            Quality = (EQuality)quality;
             SetQuantity();
         }
         private void SetQuantity()
@@ -35,21 +33,24 @@
                     break;
             }
         }
-        public override float Price()
+        public override float FinalPrice(int quotedQuantity, float unitaryPrice)
         {
+            UnitaryPrice = unitaryPrice;
+            QuotedPrice = unitaryPrice;
+
             if (Sleeve == ESleeve.Short)
             {
-                FinalPrice -= BasePrice * 0.1f;
+                QuotedPrice -= UnitaryPrice * 0.1f;
             }
 
             if (Neck == ENeck.Mao)
             {
-                FinalPrice += BasePrice * 0.03f;
+                QuotedPrice += UnitaryPrice * 0.03f;
             }
 
             CalculatePrice();
 
-            return FinalPrice;
+            return QuotedPrice * quotedQuantity;
         }
     }
 }

@@ -6,13 +6,16 @@ namespace CotizadorExpress.Models
     {
         public string Name { get; }
         public string Address { get; }
-        public List<Garment> Garments { get;}
-
+        public List<Garment> Garments { get; set; }
         public Store(string name, string address)
         {
             Name = name;
             Address = address;
-            Garments = new List<Garment>();
+            Garments = new List<Garment> {new Shirt(), new Pant()};
+        }
+        public int GetStock(int index)
+        {
+            return Garments[index].Stock;
         }
     }
 }

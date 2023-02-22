@@ -2,6 +2,8 @@
 using CotizadorExpress.Views;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
+using static CotizadorExpress.Models.Garment;
 
 namespace CotizadorExpress.Presenters
 {
@@ -30,29 +32,46 @@ namespace CotizadorExpress.Presenters
             _iView.SellerLastName = _seller.LastName;
             _iView.SellerId = _seller.Id.ToString();
         }
-        public float QuoteShirt(int shirtSleeve, int shirtNeck, int quality, int quantity, float price)
+        public string Quote(int quantity, float price)
         {
-            Shirt shirt = new Shirt((Shirt.ESleeve)shirtSleeve, (Shirt.ENeck)shirtNeck, (Garment.EQuality)quality, price);
-            float result = shirt.Price() * quantity;
+            if (GetElementStock() >= quantity)
+            {
+                float result = _store.Garments[_iView.GarmentType].FinalPrice(quantity, price);
 
-            Quote quote = new Quote(_seller.Id, "Camisa", quantity, result);
-            _seller.QuotesHistory.Add(quote);
+                switch (_iView.GarmentType)
+                {
+                    case 0:
+                        _seller.SaveQuote("Camisa", quantity, result);
+                        break;
+                    case 1:
+                        _seller.SaveQuote("Pantalon", quantity, result);
+                        break;
+                }
 
-            return result;
-        }
-        public float QuotePant(int pantType, int quality, int quantity, float price)
-        {
-            Pant pant = new Pant((Pant.EPantType)pantType, (Garment.EQuality)quality, price);
-            float result = pant.Price() * quantity;
+                return $"${result}";
+            }
 
-            Quote quote = new Quote(_seller.Id, "Pantalón", quantity, result);
-            _seller.QuotesHistory.Add(quote);
-
-            return result;
+            return "Inventario insuficiente";
         }
         public List<Quote> GetQuotes()
         {
             return _seller.QuotesHistory;
+        }
+        private void SetElementToQuote()
+        {
+            if (_iView.GarmentType == 0)
+            {
+                _store.Garments[0] = new Shirt(_iView.ShirtSleeve, _iView.ShirtNeck, _iView.Quality);
+            }
+            else
+            {
+                _store.Garments[1] = new Pant(_iView.PantType, _iView.Quality);
+            }
+        }
+        public int GetElementStock()
+        {
+            SetElementToQuote();
+            return _store.GetStock(_iView.GarmentType);
         }
     }
 }

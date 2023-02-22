@@ -1,16 +1,17 @@
-﻿namespace CotizadorExpress.Models
+﻿using System.Diagnostics;
+
+namespace CotizadorExpress.Models
 {
     internal class Pant : Garment
     {
         public enum EPantType { Normal, Skinny }
         private EPantType PantType;
 
-        public Pant(EPantType pantType, EQuality quality, float price)
+        public Pant(){}
+        public Pant(int pantType, int quality)
         {
-            Quality = quality;
-            PantType = pantType;
-            BasePrice = price;
-            FinalPrice = price;
+            PantType = (EPantType)pantType;
+            Quality = (EQuality)quality;
 
             SetQuantity();
         }
@@ -18,16 +19,19 @@
         {
             Stock = PantType == EPantType.Skinny ? 750 : 250;
         }
-        public override float Price()
+        public override float FinalPrice(int quotedQuantity, float unitaryPrice)
         {
+            UnitaryPrice = unitaryPrice;
+            QuotedPrice = unitaryPrice;
+
             if (PantType == EPantType.Skinny)
             {
-                FinalPrice -= BasePrice * 0.12f;
+                QuotedPrice -= UnitaryPrice * 0.12f;
             }
 
             CalculatePrice();
 
-            return FinalPrice;
+            return QuotedPrice;
         }
     }
 }

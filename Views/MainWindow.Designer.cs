@@ -1,6 +1,6 @@
 ﻿namespace CotizadorExpress
 {
-    partial class Form1
+    partial class MainWindow
     {
         /// <summary>
         /// Variable del diseñador necesaria.
@@ -39,6 +39,7 @@
             this.radioButtonShirt = new System.Windows.Forms.RadioButton();
             this.radioButtonPant = new System.Windows.Forms.RadioButton();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.groupBoxQuality = new System.Windows.Forms.GroupBox();
             this.radioButtonQualityPremium = new System.Windows.Forms.RadioButton();
             this.radioButtonQualityStandard = new System.Windows.Forms.RadioButton();
@@ -51,13 +52,16 @@
             this.panelSleeve = new System.Windows.Forms.Panel();
             this.radioButtonSleeveLong = new System.Windows.Forms.RadioButton();
             this.radioButtonSleeveShort = new System.Windows.Forms.RadioButton();
+            this.labelTotalAmount = new System.Windows.Forms.Label();
+            this.labelTotal = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.labelPrice = new System.Windows.Forms.Label();
             this.labelQuantity = new System.Windows.Forms.Label();
             this.labelSeller = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.buttonQuotesHistory = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.labelStockQuantity = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.sellerPicture)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownPrice)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownQuantity)).BeginInit();
@@ -73,7 +77,7 @@
             this.btn_Quote.BackColor = System.Drawing.SystemColors.Control;
             this.btn_Quote.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btn_Quote.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btn_Quote.Location = new System.Drawing.Point(12, 315);
+            this.btn_Quote.Location = new System.Drawing.Point(333, 276);
             this.btn_Quote.Name = "btn_Quote";
             this.btn_Quote.Size = new System.Drawing.Size(75, 23);
             this.btn_Quote.TabIndex = 0;
@@ -84,7 +88,7 @@
             // labelStoreName
             // 
             this.labelStoreName.AutoSize = true;
-            this.labelStoreName.Location = new System.Drawing.Point(160, 12);
+            this.labelStoreName.Location = new System.Drawing.Point(71, 12);
             this.labelStoreName.Name = "labelStoreName";
             this.labelStoreName.Size = new System.Drawing.Size(77, 13);
             this.labelStoreName.TabIndex = 1;
@@ -93,7 +97,7 @@
             // labelStoreAddress
             // 
             this.labelStoreAddress.AutoSize = true;
-            this.labelStoreAddress.Location = new System.Drawing.Point(160, 49);
+            this.labelStoreAddress.Location = new System.Drawing.Point(71, 49);
             this.labelStoreAddress.Name = "labelStoreAddress";
             this.labelStoreAddress.Size = new System.Drawing.Size(85, 13);
             this.labelStoreAddress.TabIndex = 2;
@@ -102,7 +106,7 @@
             // sellerPicture
             // 
             this.sellerPicture.Image = global::CotizadorExpress.Properties.Resources.iconDefault;
-            this.sellerPicture.Location = new System.Drawing.Point(12, 12);
+            this.sellerPicture.Location = new System.Drawing.Point(276, 33);
             this.sellerPicture.Name = "sellerPicture";
             this.sellerPicture.Size = new System.Drawing.Size(50, 50);
             this.sellerPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -138,7 +142,7 @@
             // 
             // buttonClear
             // 
-            this.buttonClear.Location = new System.Drawing.Point(93, 315);
+            this.buttonClear.Location = new System.Drawing.Point(414, 276);
             this.buttonClear.Name = "buttonClear";
             this.buttonClear.Size = new System.Drawing.Size(75, 23);
             this.buttonClear.TabIndex = 8;
@@ -172,6 +176,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.labelStockQuantity);
+            this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.groupBoxQuality);
             this.groupBox1.Controls.Add(this.panelPantType);
             this.groupBox1.Controls.Add(this.panelNeck);
@@ -180,10 +186,19 @@
             this.groupBox1.Controls.Add(this.radioButtonPant);
             this.groupBox1.Location = new System.Drawing.Point(13, 89);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(501, 168);
+            this.groupBox1.Size = new System.Drawing.Size(476, 168);
             this.groupBox1.TabIndex = 11;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Tipo de prenda";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(260, 108);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(88, 13);
+            this.label3.TabIndex = 15;
+            this.label3.Text = "Stock disponible:";
             // 
             // groupBoxQuality
             // 
@@ -195,7 +210,7 @@
             this.groupBoxQuality.Size = new System.Drawing.Size(200, 48);
             this.groupBoxQuality.TabIndex = 14;
             this.groupBoxQuality.TabStop = false;
-            this.groupBoxQuality.Text = "Calidad";
+            this.groupBoxQuality.Text = "Calidad prenda";
             // 
             // radioButtonQualityPremium
             // 
@@ -207,6 +222,7 @@
             this.radioButtonQualityPremium.TabStop = true;
             this.radioButtonQualityPremium.Text = "Premium";
             this.radioButtonQualityPremium.UseVisualStyleBackColor = true;
+            this.radioButtonQualityPremium.CheckedChanged += new System.EventHandler(this.radioButtonQualityPremium_CheckedChanged);
             this.radioButtonQualityPremium.MouseHover += new System.EventHandler(this.radioButtonQualityPremium_MouseHover);
             // 
             // radioButtonQualityStandard
@@ -219,6 +235,7 @@
             this.radioButtonQualityStandard.TabStop = true;
             this.radioButtonQualityStandard.Text = "Standard";
             this.radioButtonQualityStandard.UseVisualStyleBackColor = true;
+            this.radioButtonQualityStandard.CheckedChanged += new System.EventHandler(this.radioButtonQualityStandard_CheckedChanged);
             // 
             // panelPantType
             // 
@@ -325,14 +342,35 @@
             this.radioButtonSleeveShort.CheckedChanged += new System.EventHandler(this.radioButtonSleeveShort_CheckedChanged);
             this.radioButtonSleeveShort.MouseHover += new System.EventHandler(this.radioButtonSleeveShort_MouseHover);
             // 
+            // labelTotalAmount
+            // 
+            this.labelTotalAmount.AutoSize = true;
+            this.labelTotalAmount.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelTotalAmount.ForeColor = System.Drawing.SystemColors.MenuHighlight;
+            this.labelTotalAmount.Location = new System.Drawing.Point(71, 315);
+            this.labelTotalAmount.Name = "labelTotalAmount";
+            this.labelTotalAmount.Size = new System.Drawing.Size(0, 13);
+            this.labelTotalAmount.TabIndex = 19;
+            // 
+            // labelTotal
+            // 
+            this.labelTotal.AutoSize = true;
+            this.labelTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelTotal.ForeColor = System.Drawing.SystemColors.MenuHighlight;
+            this.labelTotal.Location = new System.Drawing.Point(10, 315);
+            this.labelTotal.Name = "labelTotal";
+            this.labelTotal.Size = new System.Drawing.Size(55, 13);
+            this.labelTotal.TabIndex = 18;
+            this.labelTotal.Text = "TOTAL :";
+            // 
             // labelPrice
             // 
             this.labelPrice.AutoSize = true;
             this.labelPrice.Location = new System.Drawing.Point(10, 260);
             this.labelPrice.Name = "labelPrice";
-            this.labelPrice.Size = new System.Drawing.Size(37, 13);
+            this.labelPrice.Size = new System.Drawing.Size(74, 13);
             this.labelPrice.TabIndex = 12;
-            this.labelPrice.Text = "Precio";
+            this.labelPrice.Text = "Precio unitario";
             // 
             // labelQuantity
             // 
@@ -346,7 +384,7 @@
             // labelSeller
             // 
             this.labelSeller.AutoSize = true;
-            this.labelSeller.Location = new System.Drawing.Point(101, 12);
+            this.labelSeller.Location = new System.Drawing.Point(10, 12);
             this.labelSeller.Name = "labelSeller";
             this.labelSeller.Size = new System.Drawing.Size(43, 13);
             this.labelSeller.TabIndex = 14;
@@ -355,27 +393,18 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(101, 49);
+            this.label1.Location = new System.Drawing.Point(10, 49);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(55, 13);
             this.label1.TabIndex = 15;
             this.label1.Text = "Dirección:";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(10, 65);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(53, 13);
-            this.label2.TabIndex = 16;
-            this.label2.Text = "Vendedor";
             // 
             // buttonQuotesHistory
             // 
             this.buttonQuotesHistory.BackColor = System.Drawing.SystemColors.Control;
             this.buttonQuotesHistory.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonQuotesHistory.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.buttonQuotesHistory.Location = new System.Drawing.Point(268, 12);
+            this.buttonQuotesHistory.Location = new System.Drawing.Point(341, 44);
             this.buttonQuotesHistory.Name = "buttonQuotesHistory";
             this.buttonQuotesHistory.Size = new System.Drawing.Size(135, 23);
             this.buttonQuotesHistory.TabIndex = 17;
@@ -383,12 +412,32 @@
             this.buttonQuotesHistory.UseVisualStyleBackColor = true;
             this.buttonQuotesHistory.Click += new System.EventHandler(this.buttonQuotesHistory_Click);
             // 
-            // Form1
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(273, 12);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(53, 13);
+            this.label2.TabIndex = 16;
+            this.label2.Text = "Vendedor";
+            // 
+            // labelStockQuantity
+            // 
+            this.labelStockQuantity.AutoSize = true;
+            this.labelStockQuantity.Location = new System.Drawing.Point(354, 108);
+            this.labelStockQuantity.Name = "labelStockQuantity";
+            this.labelStockQuantity.Size = new System.Drawing.Size(13, 13);
+            this.labelStockQuantity.TabIndex = 16;
+            this.labelStockQuantity.Text = "0";
+            // 
+            // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(534, 411);
+            this.ClientSize = new System.Drawing.Size(505, 348);
+            this.Controls.Add(this.labelTotalAmount);
             this.Controls.Add(this.buttonQuotesHistory);
+            this.Controls.Add(this.labelTotal);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.labelSeller);
@@ -402,7 +451,7 @@
             this.Controls.Add(this.labelStoreAddress);
             this.Controls.Add(this.labelStoreName);
             this.Controls.Add(this.btn_Quote);
-            this.Name = "Form1";
+            this.Name = "MainWindow";
             this.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.Text = "Cotizador Express";
             ((System.ComponentModel.ISupportInitialize)(this.sellerPicture)).EndInit();
@@ -452,8 +501,12 @@
         private System.Windows.Forms.Label labelQuantity;
         private System.Windows.Forms.Label labelSeller;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button buttonQuotesHistory;
+        private System.Windows.Forms.Label labelTotal;
+        private System.Windows.Forms.Label labelTotalAmount;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label labelStockQuantity;
     }
 }
 

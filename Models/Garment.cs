@@ -4,8 +4,8 @@
     {
         public enum EQuality { Standard, Premium }
         protected EQuality Quality = EQuality.Standard;
-        protected float BasePrice { get; set; }
-        protected float FinalPrice { get; set; }
+        public float UnitaryPrice { get; set; }
+        protected float QuotedPrice { get; set; }
         public int Stock { get; set; }
 
         #region Methods
@@ -13,10 +13,10 @@
         {
             if (Quality == EQuality.Premium)
             {
-                FinalPrice += BasePrice * 0.3f;
+                QuotedPrice += UnitaryPrice * 0.3f;
             }
         }
-        public abstract float Price();
+        public abstract float FinalPrice(int quotedQuantity, float unitaryPrice);
         #endregion
     }
 }
