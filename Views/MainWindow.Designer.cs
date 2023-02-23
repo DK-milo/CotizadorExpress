@@ -39,6 +39,7 @@
             this.radioButtonShirt = new System.Windows.Forms.RadioButton();
             this.radioButtonPant = new System.Windows.Forms.RadioButton();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.labelStockQuantity = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.groupBoxQuality = new System.Windows.Forms.GroupBox();
             this.radioButtonQualityPremium = new System.Windows.Forms.RadioButton();
@@ -61,7 +62,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.buttonQuotesHistory = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
-            this.labelStockQuantity = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.sellerPicture)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownPrice)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownQuantity)).BeginInit();
@@ -76,6 +76,7 @@
             // 
             this.btn_Quote.BackColor = System.Drawing.SystemColors.Control;
             this.btn_Quote.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_Quote.Enabled = false;
             this.btn_Quote.ForeColor = System.Drawing.SystemColors.ControlText;
             this.btn_Quote.Location = new System.Drawing.Point(333, 276);
             this.btn_Quote.Name = "btn_Quote";
@@ -119,7 +120,7 @@
             this.numericUpDownPrice.DecimalPlaces = 1;
             this.numericUpDownPrice.Location = new System.Drawing.Point(13, 276);
             this.numericUpDownPrice.Maximum = new decimal(new int[] {
-            9999,
+            999,
             0,
             0,
             0});
@@ -132,13 +133,14 @@
             // 
             this.numericUpDownQuantity.Location = new System.Drawing.Point(139, 276);
             this.numericUpDownQuantity.Maximum = new decimal(new int[] {
-            9999,
+            999,
             0,
             0,
             0});
             this.numericUpDownQuantity.Name = "numericUpDownQuantity";
             this.numericUpDownQuantity.Size = new System.Drawing.Size(120, 20);
             this.numericUpDownQuantity.TabIndex = 7;
+            this.numericUpDownQuantity.ValueChanged += new System.EventHandler(this.numericUpDownQuantity_ValueChanged);
             // 
             // buttonClear
             // 
@@ -190,6 +192,15 @@
             this.groupBox1.TabIndex = 11;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Tipo de prenda";
+            // 
+            // labelStockQuantity
+            // 
+            this.labelStockQuantity.AutoSize = true;
+            this.labelStockQuantity.Location = new System.Drawing.Point(354, 108);
+            this.labelStockQuantity.Name = "labelStockQuantity";
+            this.labelStockQuantity.Size = new System.Drawing.Size(13, 13);
+            this.labelStockQuantity.TabIndex = 16;
+            this.labelStockQuantity.Text = "0";
             // 
             // label3
             // 
@@ -420,15 +431,6 @@
             this.label2.Size = new System.Drawing.Size(53, 13);
             this.label2.TabIndex = 16;
             this.label2.Text = "Vendedor";
-            // 
-            // labelStockQuantity
-            // 
-            this.labelStockQuantity.AutoSize = true;
-            this.labelStockQuantity.Location = new System.Drawing.Point(354, 108);
-            this.labelStockQuantity.Name = "labelStockQuantity";
-            this.labelStockQuantity.Size = new System.Drawing.Size(13, 13);
-            this.labelStockQuantity.TabIndex = 16;
-            this.labelStockQuantity.Text = "0";
             // 
             // MainWindow
             // 

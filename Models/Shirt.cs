@@ -2,11 +2,13 @@
 {
     internal class Shirt : Garment
     {
-        public enum ESleeve { Short, Long }
+        #region Properties
+        private enum ESleeve { Short, Long }
         private ESleeve Sleeve;
-        public enum ENeck { Normal, Mao }
+        private enum ENeck { Normal, Mao }
         private ENeck Neck;
-
+        #endregion
+        
         public Shirt(){ }
         public Shirt(int sleeve, int neck, int quality)
         {
@@ -15,7 +17,9 @@
             Quality = (EQuality)quality;
             SetQuantity();
         }
-        private void SetQuantity()
+
+        #region Inherited Methods
+        protected sealed override void SetQuantity()
         {
             switch (Sleeve)
             {
@@ -48,9 +52,11 @@
                 QuotedPrice += UnitaryPrice * 0.03f;
             }
 
-            CalculatePrice();
+            ModifyPrice();
 
             return QuotedPrice * quotedQuantity;
         }
+        #endregion
+
     }
 }

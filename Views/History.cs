@@ -6,6 +6,7 @@ namespace CotizadorExpress
     {
         public History()
         {
+            CenterToScreen();
             InitializeComponent();
             labelHistory.Text = "";
         }

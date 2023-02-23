@@ -2,8 +2,6 @@
 using CotizadorExpress.Views;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
-using static CotizadorExpress.Models.Garment;
 
 namespace CotizadorExpress.Presenters
 {

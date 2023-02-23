@@ -45,7 +45,6 @@ namespace CotizadorExpress
         }
 
         #region Garment Options
-
         // Check which option (shirt, pant) is selected
         private void radioButtonShirt_CheckedChanged(object sender, EventArgs e)
         {
@@ -181,6 +180,13 @@ namespace CotizadorExpress
         private void numericUpDownPrice_ValueChanged(object sender, EventArgs e)
         {
             numericUpDownPrice.Text = numericUpDownPrice.Text.Replace('.', ',');
+            if (numericUpDownPrice.Value == 0 || numericUpDownQuantity.Value == 0 || groupBoxQuality.Enabled == false) { btn_Quote.Enabled = false; return; }
+            btn_Quote.Enabled = true;
+        }
+        private void numericUpDownQuantity_ValueChanged(object sender, EventArgs e)
+        {
+            if (numericUpDownPrice.Value == 0 || numericUpDownQuantity.Value == 0 || groupBoxQuality.Enabled == false) { btn_Quote.Enabled = false; return; }
+            btn_Quote.Enabled = true;
         }
         private void btn_Quote_Click(object sender, EventArgs e)
         {
@@ -233,6 +239,5 @@ namespace CotizadorExpress
                 MessageBox.Show("No hay cotizaciones realizadas", "", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
-
     }
 }

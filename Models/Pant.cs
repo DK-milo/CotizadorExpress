@@ -1,12 +1,12 @@
-﻿using System.Diagnostics;
-
-namespace CotizadorExpress.Models
+﻿namespace CotizadorExpress.Models
 {
     internal class Pant : Garment
     {
-        public enum EPantType { Normal, Skinny }
+        #region Properties
+        private enum EPantType { Normal, Skinny }
         private EPantType PantType;
-
+        #endregion
+        
         public Pant(){}
         public Pant(int pantType, int quality)
         {
@@ -15,7 +15,9 @@ namespace CotizadorExpress.Models
 
             SetQuantity();
         }
-        private void SetQuantity()
+
+        #region Inherited Methods
+        protected sealed override void SetQuantity()
         {
             Stock = PantType == EPantType.Skinny ? 750 : 250;
         }
@@ -29,9 +31,10 @@ namespace CotizadorExpress.Models
                 QuotedPrice -= UnitaryPrice * 0.12f;
             }
 
-            CalculatePrice();
+            ModifyPrice();
 
             return QuotedPrice;
         }
+        #endregion
     }
 }
