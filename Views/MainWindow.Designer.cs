@@ -166,7 +166,7 @@
             // labelStockQuantity
             // 
             this.labelStockQuantity.AutoSize = true;
-            this.labelStockQuantity.Location = new System.Drawing.Point(354, 108);
+            this.labelStockQuantity.Location = new System.Drawing.Point(354, 104);
             this.labelStockQuantity.Name = "labelStockQuantity";
             this.labelStockQuantity.Size = new System.Drawing.Size(0, 13);
             this.labelStockQuantity.TabIndex = 16;
