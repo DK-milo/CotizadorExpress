@@ -6,7 +6,7 @@ Desafio final curso C#
 
 ## Interfaz
 
-Para ejecutar el programa hacer doble click en el archivo CotizadorExpress.exe
+Para ejecutar el programa hacer doble click en el archivo CotizadorExpress.exe que se encuentra ubicado en la carpeta bin->debug
 
 - Ventana principal
 
