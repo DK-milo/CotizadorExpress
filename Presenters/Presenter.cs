@@ -7,9 +7,11 @@ namespace CotizadorExpress.Presenters
 {
     internal class Presenter
     {
+        #region Properties
         private readonly IView _iView;
-        private Store _store;
-        private Seller _seller;
+        private readonly Store _store;
+        private readonly Seller _seller;
+        #endregion
 
         public Presenter(IView view)
         {
@@ -21,6 +23,7 @@ namespace CotizadorExpress.Presenters
 
             SetUiTexts();
         }
+
         private void SetUiTexts()
         {
             _iView.StoreName = _store.Name;
@@ -30,8 +33,29 @@ namespace CotizadorExpress.Presenters
             _iView.SellerLastName = _seller.LastName;
             _iView.SellerId = _seller.Id.ToString();
         }
-        public string Quote(int quantity, float price)
+
+        public int GetElementStock()
         {
+            if (_iView.GarmentType == 0)
+            {
+                _store.Garments[0] = new Shirt(_iView.ShirtSleeve, _iView.ShirtNeck, _iView.Quality);
+            }
+            else
+            {
+                _store.Garments[1] = new Pant(_iView.PantType, _iView.Quality);
+            }
+
+            return _store.GetStock(_iView.GarmentType);
+        }
+
+        public bool Quote(int quantity, float price)
+        {
+            if (quantity == 0 || price == 0)
+            {
+                _iView.Message = "El valor o la cantidad no pueden ser 0";
+                return false;
+            }
+
             if (GetElementStock() >= quantity)
             {
                 float result = _store.Garments[_iView.GarmentType].FinalPrice(quantity, price);
@@ -46,30 +70,23 @@ namespace CotizadorExpress.Presenters
                         break;
                 }
 
-                return $"${result}";
+                _iView.Message = $"${result}";
+                return true;
             }
 
-            return "Inventario insuficiente";
+            _iView.Message = "Inventario insuficiente";
+            return false;
         }
-        public List<Quote> GetQuotes()
+        public bool PrintQuotes()
         {
-            return _seller.QuotesHistory;
-        }
-        private void SetElementToQuote()
-        {
-            if (_iView.GarmentType == 0)
+            if (_seller.QuotesHistory.Count > 0)
             {
-                _store.Garments[0] = new Shirt(_iView.ShirtSleeve, _iView.ShirtNeck, _iView.Quality);
+                _iView.Message = _seller.PrintQuotes();
+                return true;
             }
-            else
-            {
-                _store.Garments[1] = new Pant(_iView.PantType, _iView.Quality);
-            }
-        }
-        public int GetElementStock()
-        {
-            SetElementToQuote();
-            return _store.GetStock(_iView.GarmentType);
+
+            _iView.Message = "No hay cotizaciones realizadas";
+            return false;
         }
     }
 }

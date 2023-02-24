@@ -3,6 +3,7 @@ using System.Globalization;
 using System.Windows.Forms;
 using CotizadorExpress.Views;
 using CotizadorExpress.Presenters;
+using System.Diagnostics;
 
 namespace CotizadorExpress
 {
@@ -27,10 +28,11 @@ namespace CotizadorExpress
         public string SellerName { get; set; }
         public string SellerLastName { get; set; }
         public string SellerId { get; set; }
+        public string Message { get; set; }
 
         // Quote
-        public string Price => numericUpDownPrice.Text;
-        public string Quantity => numericUpDownQuantity.Text;
+        public string Price => textBoxPrice.Text;
+        public string Quantity => textBoxQuantity.Text;
         public int Quality { get; set; }
         public int GarmentType { get; set; }
         public int ShirtSleeve { get; set; }
@@ -76,11 +78,11 @@ namespace CotizadorExpress
 
             radioButtonQualityStandard.Checked = false;
             radioButtonQualityPremium.Checked = false;
-            labelStockQuantity.Text = "0";
-            numericUpDownPrice.Text = "0";
-            numericUpDownQuantity.Text = "0";
+            labelStockQuantity.Text = "";
+            //textBoxPrice.Text = "";
+            //textBoxQuantity.Text = "";
             labelTotalAmount.Text = "";
-            SetStockUi();
+            UpdateStockUi();
         }
 
         // Check if a sleeve option is selected
@@ -90,7 +92,7 @@ namespace CotizadorExpress
             {
                 panelNeck.Enabled = true;
             }
-            SetStockUi();
+            UpdateStockUi();
         }
         private void radioButtonSleeveLong_CheckedChanged(object sender, EventArgs e)
         {
@@ -98,41 +100,41 @@ namespace CotizadorExpress
             {
                 panelNeck.Enabled = true;
             }
-            SetStockUi();
+            UpdateStockUi();
         }
 
         // Check if a neck option is selected
         private void radioButtonNeckNormal_CheckedChanged(object sender, EventArgs e)
         {
             groupBoxQuality.Enabled = radioButtonNeckNormal.Checked;
-            SetStockUi();
+            UpdateStockUi();
         }
         private void radioButtonNeckMao_CheckedChanged(object sender, EventArgs e)
         {
             groupBoxQuality.Enabled = radioButtonNeckMao.Checked;
-            SetStockUi();
+            UpdateStockUi();
         }
 
         // If pant check the type selected
         private void radioButtonTypeNormal_CheckedChanged(object sender, EventArgs e)
         {
             groupBoxQuality.Enabled = radioButtonTypeNormal.Checked;
-            SetStockUi();
+            UpdateStockUi();
         }
         private void radioButtonTypeSkinny_CheckedChanged(object sender, EventArgs e)
         {
             groupBoxQuality.Enabled = radioButtonTypeSkinny.Checked;
-            SetStockUi();
+            UpdateStockUi();
         }
 
         // Check the selected quality and set the stock
         private void radioButtonQualityStandard_CheckedChanged(object sender, EventArgs e)
         {
-            SetStockUi();
+            UpdateStockUi();
         }
         private void radioButtonQualityPremium_CheckedChanged(object sender, EventArgs e)
         {
-            SetStockUi();
+            UpdateStockUi();
         }
         #endregion
 
@@ -155,7 +157,7 @@ namespace CotizadorExpress
         }
         #endregion
 
-        public void SetStockUi()
+        public void UpdateStockUi()
         {
             if (((radioButtonShirt.Checked && (radioButtonSleeveShort.Checked || radioButtonSleeveLong.Checked) && (radioButtonNeckNormal.Checked || radioButtonNeckMao.Checked))
                 || radioButtonPant.Checked && (radioButtonTypeNormal.Checked || radioButtonTypeSkinny.Checked))
@@ -173,32 +175,62 @@ namespace CotizadorExpress
                 labelStockQuantity.Text = _presenter.GetElementStock().ToString(CultureInfo.InvariantCulture);
             }
         }
+
         private void SellerPicture_Click(object sender, EventArgs e)
         {
             MessageBox.Show($"Nombre: {SellerName} \nApellido: {SellerLastName} \nID: {SellerId}", "Información Vendedor", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
-        private void numericUpDownPrice_ValueChanged(object sender, EventArgs e)
+        private void buttonQuotesHistory_Click(object sender, EventArgs e)
         {
-            numericUpDownPrice.Text = numericUpDownPrice.Text.Replace('.', ',');
-            if (numericUpDownPrice.Value == 0 || numericUpDownQuantity.Value == 0 || groupBoxQuality.Enabled == false) { btn_Quote.Enabled = false; return; }
-            btn_Quote.Enabled = true;
+            if (_presenter.PrintQuotes())
+            {
+                History form = new History();
+                form.SetHistory(Message);
+                form.Show();
+            }
+            else
+            {
+                MessageBox.Show($"{Message}", "", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
-        private void numericUpDownQuantity_ValueChanged(object sender, EventArgs e)
-        {
-            if (numericUpDownPrice.Value == 0 || numericUpDownQuantity.Value == 0 || groupBoxQuality.Enabled == false) { btn_Quote.Enabled = false; return; }
-            btn_Quote.Enabled = true;
-        }
+
         private void btn_Quote_Click(object sender, EventArgs e)
         {
-            float.TryParse(numericUpDownPrice.Text, out float price);
-            int.TryParse(numericUpDownQuantity.Text, out int quantity);
-            
-            labelTotalAmount.Text = $"{_presenter.Quote(quantity, price)}";
+            if (((!radioButtonShirt.Checked && !radioButtonSleeveShort.Checked && !radioButtonSleeveLong.Checked && !radioButtonNeckNormal.Checked && !radioButtonNeckMao.Checked)
+                 || !radioButtonPant.Checked && !radioButtonTypeNormal.Checked && !radioButtonTypeSkinny.Checked)
+                && (!radioButtonQualityStandard.Checked && !radioButtonQualityPremium.Checked))
+            {
+                MessageBox.Show("Faltan datos por diligenciar", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                try
+                {
+                    float price = float.Parse(textBoxPrice.Text.Replace('.', ','));
+                    int quantity = int.Parse(textBoxQuantity.Text);
+
+                    if (_presenter.Quote(quantity, price))
+                    {
+                        labelTotalAmount.Text = Message;
+                    }
+                    else
+                    {
+                        MessageBox.Show($"{Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Formato invalido para el precio o cantidad", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+
+            //float.TryParse(numericUpDownPrice.Text, out float price);
+            //int.TryParse(numericUpDownQuantity.Text, out int quantity);
         }
         private void buttonClear_Click(object sender, EventArgs e)
         {
-            numericUpDownPrice.Text = "0";
-            numericUpDownQuantity.Text = "0";
+            textBoxPrice.Text = "";
+            textBoxQuantity.Text = "";
             labelTotalAmount.Text = "";
 
             radioButtonShirt.Checked = false;
@@ -219,25 +251,7 @@ namespace CotizadorExpress
             radioButtonQualityPremium.Checked = false;
             groupBoxQuality.Enabled = false;
 
-            labelStockQuantity.Text = "0";
-        }
-        private void buttonQuotesHistory_Click(object sender, EventArgs e)
-        {
-            if (_presenter.GetQuotes().Count > 0)
-            {
-                History form = new History();
-
-                foreach (var quotes in _presenter.GetQuotes())
-                {
-                    form.SetHistory(quotes.PrintData());
-                }
-
-                form.Show();
-            }
-            else
-            {
-                MessageBox.Show("No hay cotizaciones realizadas", "", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
+            labelStockQuantity.Text = "";
         }
     }
 }

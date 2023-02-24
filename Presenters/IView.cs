@@ -12,6 +12,7 @@
         string SellerId { get; set; }
 
         // General
+        string Message { get; set; }
         string Quantity { get; }
         string Price { get; }
         int Quality { get; }
@@ -24,6 +25,6 @@
         // Pant
         int PantType { get; set; }
 
-        void SetStockUi();
+        void UpdateStockUi();
     }
 }

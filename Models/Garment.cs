@@ -14,7 +14,7 @@
         {
             if (Quality == EQuality.Premium)
             {
-                QuotedPrice += UnitaryPrice * 0.3f;
+                QuotedPrice += QuotedPrice * 0.3f;
             }
         }
 

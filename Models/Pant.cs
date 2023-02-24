@@ -32,8 +32,8 @@
             }
 
             ModifyPrice();
-
-            return QuotedPrice;
+            
+            return QuotedPrice * quotedQuantity;
         }
         #endregion
     }

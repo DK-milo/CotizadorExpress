@@ -3,7 +3,7 @@ using System.Globalization;
 
 namespace CotizadorExpress.Models
 {
-    internal class Quote
+    internal class Quote: IPrintable
     {
         #region Properties
         private int _id;
@@ -24,9 +24,11 @@ namespace CotizadorExpress.Models
             _quoteResult = result;
         }
 
+        #region Interface Methods
         public string PrintData()
         {
-            return $"ID: {_id} \nFecha: {_timeStamp} \nID Vendedor: {_sellerCode} \nPrenda: {_listedGarment} \nCantidad: {_garmentQuantity} \nTotal: {_quoteResult}";
+            return $"ID: {_id} \nFecha: {_timeStamp} \nID Vendedor: {_sellerCode} \nPrenda: {_listedGarment} \nCantidad: {_garmentQuantity} \nTotal: {_quoteResult} \n----------\n";
         }
+        #endregion
     }
 }

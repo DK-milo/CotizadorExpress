@@ -29,18 +29,16 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.btn_Quote = new System.Windows.Forms.Button();
+            this.btnQuote = new System.Windows.Forms.Button();
             this.labelStoreName = new System.Windows.Forms.Label();
             this.labelStoreAddress = new System.Windows.Forms.Label();
             this.sellerPicture = new System.Windows.Forms.PictureBox();
-            this.numericUpDownPrice = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDownQuantity = new System.Windows.Forms.NumericUpDown();
             this.buttonClear = new System.Windows.Forms.Button();
             this.radioButtonShirt = new System.Windows.Forms.RadioButton();
             this.radioButtonPant = new System.Windows.Forms.RadioButton();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.labelStockQuantity = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
+            this.labelStock = new System.Windows.Forms.Label();
             this.groupBoxQuality = new System.Windows.Forms.GroupBox();
             this.radioButtonQualityPremium = new System.Windows.Forms.RadioButton();
             this.radioButtonQualityStandard = new System.Windows.Forms.RadioButton();
@@ -58,13 +56,13 @@
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.labelPrice = new System.Windows.Forms.Label();
             this.labelQuantity = new System.Windows.Forms.Label();
-            this.labelSeller = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
+            this.labelStore = new System.Windows.Forms.Label();
+            this.labelAddress = new System.Windows.Forms.Label();
             this.buttonQuotesHistory = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
+            this.labelSeller = new System.Windows.Forms.Label();
+            this.textBoxPrice = new System.Windows.Forms.TextBox();
+            this.textBoxQuantity = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.sellerPicture)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownPrice)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownQuantity)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBoxQuality.SuspendLayout();
             this.panelPantType.SuspendLayout();
@@ -72,19 +70,18 @@
             this.panelSleeve.SuspendLayout();
             this.SuspendLayout();
             // 
-            // btn_Quote
+            // btnQuote
             // 
-            this.btn_Quote.BackColor = System.Drawing.SystemColors.Control;
-            this.btn_Quote.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btn_Quote.Enabled = false;
-            this.btn_Quote.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btn_Quote.Location = new System.Drawing.Point(333, 276);
-            this.btn_Quote.Name = "btn_Quote";
-            this.btn_Quote.Size = new System.Drawing.Size(75, 23);
-            this.btn_Quote.TabIndex = 0;
-            this.btn_Quote.Text = "Cotizar";
-            this.btn_Quote.UseVisualStyleBackColor = true;
-            this.btn_Quote.Click += new System.EventHandler(this.btn_Quote_Click);
+            this.btnQuote.BackColor = System.Drawing.SystemColors.Control;
+            this.btnQuote.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnQuote.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnQuote.Location = new System.Drawing.Point(333, 276);
+            this.btnQuote.Name = "btnQuote";
+            this.btnQuote.Size = new System.Drawing.Size(75, 23);
+            this.btnQuote.TabIndex = 0;
+            this.btnQuote.Text = "Cotizar";
+            this.btnQuote.UseVisualStyleBackColor = true;
+            this.btnQuote.Click += new System.EventHandler(this.btn_Quote_Click);
             // 
             // labelStoreName
             // 
@@ -114,33 +111,6 @@
             this.sellerPicture.TabIndex = 3;
             this.sellerPicture.TabStop = false;
             this.sellerPicture.Click += new System.EventHandler(this.SellerPicture_Click);
-            // 
-            // numericUpDownPrice
-            // 
-            this.numericUpDownPrice.DecimalPlaces = 1;
-            this.numericUpDownPrice.Location = new System.Drawing.Point(13, 276);
-            this.numericUpDownPrice.Maximum = new decimal(new int[] {
-            999,
-            0,
-            0,
-            0});
-            this.numericUpDownPrice.Name = "numericUpDownPrice";
-            this.numericUpDownPrice.Size = new System.Drawing.Size(120, 20);
-            this.numericUpDownPrice.TabIndex = 6;
-            this.numericUpDownPrice.ValueChanged += new System.EventHandler(this.numericUpDownPrice_ValueChanged);
-            // 
-            // numericUpDownQuantity
-            // 
-            this.numericUpDownQuantity.Location = new System.Drawing.Point(139, 276);
-            this.numericUpDownQuantity.Maximum = new decimal(new int[] {
-            999,
-            0,
-            0,
-            0});
-            this.numericUpDownQuantity.Name = "numericUpDownQuantity";
-            this.numericUpDownQuantity.Size = new System.Drawing.Size(120, 20);
-            this.numericUpDownQuantity.TabIndex = 7;
-            this.numericUpDownQuantity.ValueChanged += new System.EventHandler(this.numericUpDownQuantity_ValueChanged);
             // 
             // buttonClear
             // 
@@ -179,7 +149,7 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.labelStockQuantity);
-            this.groupBox1.Controls.Add(this.label3);
+            this.groupBox1.Controls.Add(this.labelStock);
             this.groupBox1.Controls.Add(this.groupBoxQuality);
             this.groupBox1.Controls.Add(this.panelPantType);
             this.groupBox1.Controls.Add(this.panelNeck);
@@ -198,18 +168,17 @@
             this.labelStockQuantity.AutoSize = true;
             this.labelStockQuantity.Location = new System.Drawing.Point(354, 108);
             this.labelStockQuantity.Name = "labelStockQuantity";
-            this.labelStockQuantity.Size = new System.Drawing.Size(13, 13);
+            this.labelStockQuantity.Size = new System.Drawing.Size(0, 13);
             this.labelStockQuantity.TabIndex = 16;
-            this.labelStockQuantity.Text = "0";
             // 
-            // label3
+            // labelStock
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(260, 108);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(88, 13);
-            this.label3.TabIndex = 15;
-            this.label3.Text = "Stock disponible:";
+            this.labelStock.AutoSize = true;
+            this.labelStock.Location = new System.Drawing.Point(260, 104);
+            this.labelStock.Name = "labelStock";
+            this.labelStock.Size = new System.Drawing.Size(88, 13);
+            this.labelStock.TabIndex = 15;
+            this.labelStock.Text = "Stock disponible:";
             // 
             // groupBoxQuality
             // 
@@ -392,23 +361,23 @@
             this.labelQuantity.TabIndex = 13;
             this.labelQuantity.Text = "Cantidad";
             // 
-            // labelSeller
+            // labelStore
             // 
-            this.labelSeller.AutoSize = true;
-            this.labelSeller.Location = new System.Drawing.Point(10, 12);
-            this.labelSeller.Name = "labelSeller";
-            this.labelSeller.Size = new System.Drawing.Size(43, 13);
-            this.labelSeller.TabIndex = 14;
-            this.labelSeller.Text = "Tienda:";
+            this.labelStore.AutoSize = true;
+            this.labelStore.Location = new System.Drawing.Point(10, 12);
+            this.labelStore.Name = "labelStore";
+            this.labelStore.Size = new System.Drawing.Size(43, 13);
+            this.labelStore.TabIndex = 14;
+            this.labelStore.Text = "Tienda:";
             // 
-            // label1
+            // labelAddress
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(10, 49);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(55, 13);
-            this.label1.TabIndex = 15;
-            this.label1.Text = "Dirección:";
+            this.labelAddress.AutoSize = true;
+            this.labelAddress.Location = new System.Drawing.Point(10, 49);
+            this.labelAddress.Name = "labelAddress";
+            this.labelAddress.Size = new System.Drawing.Size(55, 13);
+            this.labelAddress.TabIndex = 15;
+            this.labelAddress.Text = "Dirección:";
             // 
             // buttonQuotesHistory
             // 
@@ -423,42 +392,54 @@
             this.buttonQuotesHistory.UseVisualStyleBackColor = true;
             this.buttonQuotesHistory.Click += new System.EventHandler(this.buttonQuotesHistory_Click);
             // 
-            // label2
+            // labelSeller
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(273, 12);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(53, 13);
-            this.label2.TabIndex = 16;
-            this.label2.Text = "Vendedor";
+            this.labelSeller.AutoSize = true;
+            this.labelSeller.Location = new System.Drawing.Point(273, 12);
+            this.labelSeller.Name = "labelSeller";
+            this.labelSeller.Size = new System.Drawing.Size(53, 13);
+            this.labelSeller.TabIndex = 16;
+            this.labelSeller.Text = "Vendedor";
+            // 
+            // textBoxPrice
+            // 
+            this.textBoxPrice.Location = new System.Drawing.Point(13, 279);
+            this.textBoxPrice.Name = "textBoxPrice";
+            this.textBoxPrice.Size = new System.Drawing.Size(100, 20);
+            this.textBoxPrice.TabIndex = 20;
+            // 
+            // textBoxQuantity
+            // 
+            this.textBoxQuantity.Location = new System.Drawing.Point(139, 279);
+            this.textBoxQuantity.Name = "textBoxQuantity";
+            this.textBoxQuantity.Size = new System.Drawing.Size(100, 20);
+            this.textBoxQuantity.TabIndex = 21;
             // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(505, 348);
+            this.Controls.Add(this.textBoxQuantity);
+            this.Controls.Add(this.textBoxPrice);
             this.Controls.Add(this.labelTotalAmount);
             this.Controls.Add(this.buttonQuotesHistory);
             this.Controls.Add(this.labelTotal);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.labelSeller);
+            this.Controls.Add(this.labelAddress);
+            this.Controls.Add(this.labelStore);
             this.Controls.Add(this.labelQuantity);
             this.Controls.Add(this.labelPrice);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.buttonClear);
-            this.Controls.Add(this.numericUpDownQuantity);
-            this.Controls.Add(this.numericUpDownPrice);
             this.Controls.Add(this.sellerPicture);
             this.Controls.Add(this.labelStoreAddress);
             this.Controls.Add(this.labelStoreName);
-            this.Controls.Add(this.btn_Quote);
+            this.Controls.Add(this.btnQuote);
             this.Name = "MainWindow";
             this.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.Text = "Cotizador Express";
             ((System.ComponentModel.ISupportInitialize)(this.sellerPicture)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownPrice)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownQuantity)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBoxQuality.ResumeLayout(false);
@@ -476,12 +457,10 @@
 
         #endregion
 
-        private System.Windows.Forms.Button btn_Quote;
+        private System.Windows.Forms.Button btnQuote;
         private System.Windows.Forms.Label labelStoreName;
         private System.Windows.Forms.Label labelStoreAddress;
         private System.Windows.Forms.PictureBox sellerPicture;
-        private System.Windows.Forms.NumericUpDown numericUpDownPrice;
-        private System.Windows.Forms.NumericUpDown numericUpDownQuantity;
         private System.Windows.Forms.Button buttonClear;
         private System.Windows.Forms.RadioButton radioButtonShirt;
         private System.Windows.Forms.RadioButton radioButtonPant;
@@ -501,14 +480,16 @@
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.Label labelPrice;
         private System.Windows.Forms.Label labelQuantity;
-        private System.Windows.Forms.Label labelSeller;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label labelStore;
+        private System.Windows.Forms.Label labelAddress;
         private System.Windows.Forms.Button buttonQuotesHistory;
         private System.Windows.Forms.Label labelTotal;
         private System.Windows.Forms.Label labelTotalAmount;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label labelSeller;
+        private System.Windows.Forms.Label labelStock;
         private System.Windows.Forms.Label labelStockQuantity;
+        private System.Windows.Forms.TextBox textBoxPrice;
+        private System.Windows.Forms.TextBox textBoxQuantity;
     }
 }
 

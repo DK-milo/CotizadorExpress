@@ -12,14 +12,7 @@ namespace CotizadorExpress
         }
         public void SetHistory(string data)
         {
-            if (labelHistory.Text == "")
-            {
-                labelHistory.Text += $"{data} \n----------";
-            }
-            else
-            {
-                labelHistory.Text += $"\n{data} \n----------";
-            }
+            labelHistory.Text = data;
         }
     }
 }
