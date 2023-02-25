@@ -1,7 +1,6 @@
 ﻿using CotizadorExpress.Models;
 using CotizadorExpress.Views;
 using System;
-using System.Collections.Generic;
 
 namespace CotizadorExpress.Presenters
 {
@@ -11,6 +10,7 @@ namespace CotizadorExpress.Presenters
         private readonly IView _iView;
         private readonly Store _store;
         private readonly Seller _seller;
+        private int _garmentIndex;
         #endregion
 
         public Presenter(IView view)
@@ -34,38 +34,38 @@ namespace CotizadorExpress.Presenters
             _iView.SellerId = _seller.Id.ToString();
         }
 
-        public int GetElementStock()
+        public void SetElementToQuote()
         {
-            int index = 0;
+            _garmentIndex = 0;
 
             if (_iView.GarmentType == 0)
             {
                 switch (_iView.ShirtSleeve)
                 {
                     case 0 when _iView.ShirtNeck == 0 && _iView.Quality == 0:
-                        index = 0;
+                        _garmentIndex = 0;
                         break;
                     case 0 when _iView.ShirtNeck == 1 && _iView.Quality == 0:
-                        index = 1;
+                        _garmentIndex = 1;
                         break;
                     case 0 when _iView.ShirtNeck == 0 && _iView.Quality == 1:
-                        index = 2;
+                        _garmentIndex = 2;
                         break;
                     case 0 when _iView.ShirtNeck == 1 && _iView.Quality == 1:
-                        index = 3;
+                        _garmentIndex = 3;
                         break;
 
                     case 1 when _iView.ShirtNeck == 0 && _iView.Quality == 0:
-                        index = 4;
+                        _garmentIndex = 4;
                         break;
                     case 1 when _iView.ShirtNeck == 1 && _iView.Quality == 0:
-                        index = 5;
+                        _garmentIndex = 5;
                         break;
                     case 1 when _iView.ShirtNeck == 0 && _iView.Quality == 1:
-                        index = 6;
+                        _garmentIndex = 6;
                         break;
                     case 1 when _iView.ShirtNeck == 1 && _iView.Quality == 1:
-                        index = 7;
+                        _garmentIndex = 7;
                         break;
                 }
             }
@@ -74,23 +74,22 @@ namespace CotizadorExpress.Presenters
                 switch (_iView.PantType)
                 {
                     case 0 when _iView.Quality == 0:
-                        index = 8;
+                        _garmentIndex = 8;
                         break;
                     case 0 when _iView.Quality == 1:
-                        index = 9;
+                        _garmentIndex = 9;
                         break;
                     case 1 when _iView.Quality == 0:
-                        index = 10;
+                        _garmentIndex = 10;
                         break;
                     case 1 when _iView.Quality == 1:
-                        index = 11;
+                        _garmentIndex = 11;
                         break;
                 }
             }
-            
-            return _store.GetGarmentStock(index);
-        }
 
+            _iView.Stock = _store.GetGarmentStock(_garmentIndex);
+        }
         public bool Quote(int quantity, float price)
         {
             if (quantity == 0 || price == 0)
@@ -99,9 +98,9 @@ namespace CotizadorExpress.Presenters
                 return false;
             }
 
-            if (GetElementStock() >= quantity)
+            if (_iView.Stock >= quantity)
             {
-                float result = _store.GetQuotedPrice(_iView.GarmentType, quantity, price);
+                float result = _store.GetQuotedPrice(_garmentIndex, quantity, price);
 
                 switch (_iView.GarmentType)
                 {

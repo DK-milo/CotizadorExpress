@@ -19,8 +19,8 @@
         }
 
         #region AbstractMethods
-        public abstract float FinalPrice(int quotedQuantity, float unitaryPrice);
         protected abstract void SetQuantity();
+        public abstract float FinalPrice(int quotedQuantity, float unitaryPrice);
         #endregion
     }
 }

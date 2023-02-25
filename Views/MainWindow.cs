@@ -3,7 +3,6 @@ using System.Globalization;
 using System.Windows.Forms;
 using CotizadorExpress.Views;
 using CotizadorExpress.Presenters;
-using System.Diagnostics;
 
 namespace CotizadorExpress
 {
@@ -28,7 +27,6 @@ namespace CotizadorExpress
         public string SellerName { get; set; }
         public string SellerLastName { get; set; }
         public string SellerId { get; set; }
-        public string Message { get; set; }
 
         // Quote
         public string Price => textBoxPrice.Text;
@@ -38,6 +36,8 @@ namespace CotizadorExpress
         public int ShirtSleeve { get; set; }
         public int ShirtNeck { get; set; }
         public int PantType { get; set; }
+        public string Message { get; set; }
+        public int Stock { get; set; }
         #endregion
 
         public MainWindow()
@@ -82,7 +82,7 @@ namespace CotizadorExpress
             //textBoxPrice.Text = "";
             //textBoxQuantity.Text = "";
             labelTotalAmount.Text = "";
-            UpdateStockUi();
+            UpdateGarmentElement();
         }
 
         // Check if a sleeve option is selected
@@ -92,7 +92,7 @@ namespace CotizadorExpress
             {
                 panelNeck.Enabled = true;
             }
-            UpdateStockUi();
+            UpdateGarmentElement();
         }
         private void radioButtonSleeveLong_CheckedChanged(object sender, EventArgs e)
         {
@@ -100,41 +100,41 @@ namespace CotizadorExpress
             {
                 panelNeck.Enabled = true;
             }
-            UpdateStockUi();
+            UpdateGarmentElement();
         }
 
         // Check if a neck option is selected
         private void radioButtonNeckNormal_CheckedChanged(object sender, EventArgs e)
         {
             groupBoxQuality.Enabled = radioButtonNeckNormal.Checked;
-            UpdateStockUi();
+            UpdateGarmentElement();
         }
         private void radioButtonNeckMao_CheckedChanged(object sender, EventArgs e)
         {
             groupBoxQuality.Enabled = radioButtonNeckMao.Checked;
-            UpdateStockUi();
+            UpdateGarmentElement();
         }
 
         // If pant check the type selected
         private void radioButtonTypeNormal_CheckedChanged(object sender, EventArgs e)
         {
             groupBoxQuality.Enabled = radioButtonTypeNormal.Checked;
-            UpdateStockUi();
+            UpdateGarmentElement();
         }
         private void radioButtonTypeSkinny_CheckedChanged(object sender, EventArgs e)
         {
             groupBoxQuality.Enabled = radioButtonTypeSkinny.Checked;
-            UpdateStockUi();
+            UpdateGarmentElement();
         }
 
         // Check the selected quality and set the stock
         private void radioButtonQualityStandard_CheckedChanged(object sender, EventArgs e)
         {
-            UpdateStockUi();
+            UpdateGarmentElement();
         }
         private void radioButtonQualityPremium_CheckedChanged(object sender, EventArgs e)
         {
-            UpdateStockUi();
+            UpdateGarmentElement();
         }
         #endregion
 
@@ -157,7 +157,7 @@ namespace CotizadorExpress
         }
         #endregion
 
-        public void UpdateStockUi()
+        public void UpdateGarmentElement()
         {
             if (((radioButtonShirt.Checked && (radioButtonSleeveShort.Checked || radioButtonSleeveLong.Checked) && (radioButtonNeckNormal.Checked || radioButtonNeckMao.Checked))
                 || radioButtonPant.Checked && (radioButtonTypeNormal.Checked || radioButtonTypeSkinny.Checked))
@@ -172,7 +172,9 @@ namespace CotizadorExpress
 
                 Quality = radioButtonQualityStandard.Checked ? 0 : 1;
 
-                labelStockQuantity.Text = _presenter.GetElementStock().ToString(CultureInfo.InvariantCulture);
+                _presenter.SetElementToQuote();
+
+                labelStockQuantity.Text = Stock.ToString(CultureInfo.InvariantCulture);
             }
         }
 

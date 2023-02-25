@@ -23,7 +23,6 @@ namespace CotizadorExpress.Models
             Quote quote = new Quote(QuotesHistory.Count + 1, Id, garment, quantity, result);
             QuotesHistory.Add(quote);
         }
-
         public string PrintQuotes()
         {
             string data = "";

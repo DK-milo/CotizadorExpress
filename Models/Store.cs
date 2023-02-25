@@ -32,6 +32,7 @@ namespace CotizadorExpress.Models
                 new Pant(1,1),
             };
         }
+
         public int GetGarmentStock(int index)
         {
             return Garments[index].Stock;

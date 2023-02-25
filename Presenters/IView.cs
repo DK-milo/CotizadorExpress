@@ -13,6 +13,7 @@
 
         // General
         string Message { get; set; }
+        int Stock { get; set; }
         string Quantity { get; }
         string Price { get; }
         int Quality { get; }
@@ -25,6 +26,6 @@
         // Pant
         int PantType { get; set; }
 
-        void UpdateStockUi();
+        void UpdateGarmentElement();
     }
 }
