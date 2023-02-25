@@ -36,16 +36,59 @@ namespace CotizadorExpress.Presenters
 
         public int GetElementStock()
         {
+            int index = 0;
+
             if (_iView.GarmentType == 0)
             {
-                _store.Garments[0] = new Shirt(_iView.ShirtSleeve, _iView.ShirtNeck, _iView.Quality);
+                switch (_iView.ShirtSleeve)
+                {
+                    case 0 when _iView.ShirtNeck == 0 && _iView.Quality == 0:
+                        index = 0;
+                        break;
+                    case 0 when _iView.ShirtNeck == 1 && _iView.Quality == 0:
+                        index = 1;
+                        break;
+                    case 0 when _iView.ShirtNeck == 0 && _iView.Quality == 1:
+                        index = 2;
+                        break;
+                    case 0 when _iView.ShirtNeck == 1 && _iView.Quality == 1:
+                        index = 3;
+                        break;
+
+                    case 1 when _iView.ShirtNeck == 0 && _iView.Quality == 0:
+                        index = 4;
+                        break;
+                    case 1 when _iView.ShirtNeck == 1 && _iView.Quality == 0:
+                        index = 5;
+                        break;
+                    case 1 when _iView.ShirtNeck == 0 && _iView.Quality == 1:
+                        index = 6;
+                        break;
+                    case 1 when _iView.ShirtNeck == 1 && _iView.Quality == 1:
+                        index = 7;
+                        break;
+                }
             }
             else
             {
-                _store.Garments[1] = new Pant(_iView.PantType, _iView.Quality);
+                switch (_iView.PantType)
+                {
+                    case 0 when _iView.Quality == 0:
+                        index = 8;
+                        break;
+                    case 0 when _iView.Quality == 1:
+                        index = 9;
+                        break;
+                    case 1 when _iView.Quality == 0:
+                        index = 10;
+                        break;
+                    case 1 when _iView.Quality == 1:
+                        index = 11;
+                        break;
+                }
             }
-
-            return _store.GetStock(_iView.GarmentType);
+            
+            return _store.GetGarmentStock(index);
         }
 
         public bool Quote(int quantity, float price)
@@ -58,7 +101,7 @@ namespace CotizadorExpress.Presenters
 
             if (GetElementStock() >= quantity)
             {
-                float result = _store.Garments[_iView.GarmentType].FinalPrice(quantity, price);
+                float result = _store.GetQuotedPrice(_iView.GarmentType, quantity, price);
 
                 switch (_iView.GarmentType)
                 {
